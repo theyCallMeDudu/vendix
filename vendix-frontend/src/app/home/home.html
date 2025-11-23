@@ -1,0 +1,16 @@
+<section>
+  <form>
+    <input type="text" placeholder="Busque por produto" #filter/>
+    <button
+      type="button"
+      (click)="filterResults(filter.value)"
+    >
+      Buscar
+    </button>
+  </form>
+</section>
+<section class="results">
+  @for(product of filteredProductList; track $index) {
+    <app-produto [product]="product" />
+  }
+</section>

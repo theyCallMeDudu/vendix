@@ -1,0 +1,26 @@
+<article>
+    <img
+      class="detail-photo"
+      [src]="produto?.img_produto"
+      alt="Foto de {{ produto?.nome_produto }}"
+      crossorigin
+  />
+  <section class="listing-description">
+    <h2>{{ produto?.nome_produto }}</h2>
+  </section>
+  <section>
+    <p>{{ produto?.preco_unitario }}</p>
+  </section>
+  <section class="listing-apply">
+    <h2 class="section-heading">Cadastrar produto</h2>
+    <form [formGroup]="formCadastro" (submit)="submitItem()">
+      <label for="nome-produto">Nome</label>
+      <input id="nome-produto" type="text" formControlName="nome_produto" />
+
+      <label for="preco-unitario">Preço unitário</label>
+      <input id="preco-unitario" type="text" formControlName="preco_unitario" />
+
+      <button type="submit" class="primary">Salvar</button>
+    </form>
+  </section>
+</article>
