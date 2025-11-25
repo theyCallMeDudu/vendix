@@ -5,36 +5,17 @@ import { IProduto } from '../IProduto';
   providedIn: 'root',
 })
 export class ProdutoService {
-  listaProdutos: IProduto[] = [
-    {
-      id: 1,
-      nome_produto: 'Brownie de doce de leite',
-      id_categoria: 1,
-      preco_unitario: 7.00,
-      img_produto: 'assets/brownie-doce-de-leite.jpg'
-    },
-    {
-      id: 2,
-      nome_produto: 'Bolo de cenoura com chocolate',
-      id_categoria: 1,
-      preco_unitario: 12.00,
-      img_produto: '/assets/brownie-doce-de-leite.jpg'
-    },
-    {
-      id: 3,
-      nome_produto: 'Bolo de fubá com goiabada',
-      id_categoria: 1,
-      preco_unitario: 15.00,
-      img_produto: '/assets/brownie-doce-de-leite.jpg'
-    },
-  ];
+  productsURL = 'http://localhost:3000/produtos';
 
-  getAllProducts(): IProduto[] {
-    return this.listaProdutos;
+  async getAllProducts(): Promise<IProduto[]> {
+    const data = await fetch(this.productsURL);
+    return (await data.json()) ?? [];
   }
 
-  getProductById(id: number): IProduto | undefined {
-    return this.listaProdutos.find((produto) => produto.id === id);
+  async getProductById(id: number): Promise<IProduto | undefined> {
+    const data = await fetch(`${this.productsURL}?id=${id}`);
+    const productJson = await data.json();
+    return productJson[0] ?? [];
   }
 
   submitProduct(nome_produto: string, preco_unitario: number) {

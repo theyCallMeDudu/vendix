@@ -11,12 +11,16 @@ import { ProdutoService } from '../services/produto.service';
 })
 export class Home {
   productsList: IProduto[] = [];
-  produtoService: ProdutoService = inject(ProdutoService);
+  productService: ProdutoService = inject(ProdutoService);
   filteredProductList: IProduto[] = [];
 
   constructor() {
-    this.productsList = this.produtoService.getAllProducts();
-    this.filteredProductList = this.productsList;
+    this.productService
+      .getAllProducts()
+      .then((productsList: IProduto[]) => {
+        this.productsList = productsList;
+        this.filteredProductList = productsList;
+      });
   }
 
   filterResults(text: string) {

@@ -21,7 +21,9 @@ export class Details {
 
   constructor() {
     const produtoId = parseInt(this.route.snapshot.params['id'], 10);
-    this.produto = this.produtoService.getProductById(produtoId);
+    this.produtoService.getProductById(produtoId).then((produto) => {
+      this.produto = produto;
+    })
   }
 
   submitItem() {

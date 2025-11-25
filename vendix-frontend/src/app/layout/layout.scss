@@ -1,0 +1,14 @@
+.root-container {
+  height: 100vh;
+}
+
+.app-sidenav {
+  width: 240px;
+  background-color: #3f2e56;
+  border-radius: 0%;
+}
+
+.app-content {
+  padding: 16px;
+  min-height: calc(100vh - 64px - 48px);
+}
