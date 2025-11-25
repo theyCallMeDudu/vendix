@@ -1,0 +1,25 @@
+{
+    "produtos": [
+    {
+      "id": 1,
+      "nome_produto": "Brownie de doce de leite",
+      "id_categoria": 1,
+      "preco_unitario": 7.00,
+      "img_produto": "assets/brownie-doce-de-leite.jpg"
+    },
+    {
+      "id": 2,
+      "nome_produto": "Bolo de cenoura com chocolate",
+      "id_categoria": 1,
+      "preco_unitario": 12.00,
+      "img_produto": "assets/brownie-doce-de-leite.jpg"
+    },
+    {
+      "id": 3,
+      "nome_produto": "Bolo de fubá com goiabada",
+      "id_categoria": 1,
+      "preco_unitario": 15.00,
+      "img_produto": "assets/brownie-doce-de-leite.jpg"
+    }
+  ]
+}
