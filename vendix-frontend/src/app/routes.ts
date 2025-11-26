@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { Home } from './home/home';
-import { Details } from './details/details';
-import { Produto } from './produto/produto';
+import { Home } from './pages/home/home';
+import { Details } from './components/details/details';
+import { ProductsPage } from './pages/products-page/products-page';
+import { CategoriesPage } from './pages/categories-page/categories-page';
 
 const routeConfig: Routes = [
   {
@@ -11,8 +12,13 @@ const routeConfig: Routes = [
   },
   {
     path: 'products',
-    component: Produto,
+    component: ProductsPage,
     title: 'Produtos'
+  },
+  {
+    path: 'categories',
+    component: CategoriesPage,
+    title: 'Categorias'
   },
   {
     path: 'details/:id',

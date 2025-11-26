@@ -1,0 +1,22 @@
+<section class="listing">
+  <img class="listing-photo" [src]="product().product_img" alt="Foto de capa de {{ product().product_name }}"
+    crossorigin />
+  <h2 class="cabecalho-lista">{{ product().product_name }}</h2>
+  <p class="preco-produto">{{ product().unit_price }}</p>
+  <a [routerLink]="['/details', product().product_id]">Detalhes</a>
+</section>
+
+  <!-- <form>
+    <input type="text" placeholder="Busque por produto" #filter/>
+    <button
+      type="button"
+      (click)="filterResults(filter.value)"
+    >
+      Buscar
+    </button>
+  </form>
+</section>
+<section class="results">
+  @for(product of filteredProductList; track $index) {
+    <app-produto [product]="product" />
+  } -->

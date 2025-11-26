@@ -1,7 +1,0 @@
-<section class="listing">
-  <img class="listing-photo" [src]="product().img_produto" alt="Foto de capa de {{ product().nome_produto }}"
-    crossorigin />
-  <h2 class="cabecalho-lista">{{ product().nome_produto }}</h2>
-  <p class="preco-produto">{{ product().preco_unitario }}</p>
-  <a [routerLink]="['/details', product().id]">Detalhes</a>
-</section>
