@@ -10,5 +10,21 @@
 }
 
 .menu-item {
-  color: #FFF !important;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  text-decoration: none;
+  font-size: 12pt;
+  font-weight: 400;
+}
+
+.menu-item:hover {
+  background-color: #FFF;
+  color: #000;
+}
+
+:host ::ng-deep .menu-item.active {
+  background-color: #FFF;
+  color: #000;
 }

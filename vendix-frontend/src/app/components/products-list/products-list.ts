@@ -10,7 +10,7 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './products-list.scss',
 })
 export class ProductsList {
-  displayedColumns: string[] = ['product_name', 'unit_price', 'actions'];
+  displayedColumns: string[] = ['product_name', 'product_category', 'unit_price', 'actions'];
   productsList: IProduct[] = [];
   filteredProductList: IProduct[] = [];
 

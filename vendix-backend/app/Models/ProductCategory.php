@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ProductCategory extends Model
@@ -11,8 +12,8 @@ class ProductCategory extends Model
     protected $primaryKey = 'product_category_id';
     protected $fillable = ['product_category_id', 'product_type_id', 'product_category_name'];
 
-    public function productType(): HasOne
+    public function productType(): BelongsTo
     {
-        return $this->hasOne(ProductType::class);
+        return $this->belongsTo(ProductType::class, 'product_type_id', 'product_type_id');
     }
 }

@@ -11,7 +11,16 @@ class ProductController extends Controller
 {
     public function getProducts(): JsonResponse
     {
-        $products = Product::all();
+        $products = Product::with('productCategory')->get()
+            ->map(function ($product) {
+                return [
+                    'product_id'            => $product->product_id,
+                    'product_name'          => $product->product_name,
+                    'unit_price'            => $product->unit_price,
+                    'product_category_name' => $product->productCategory->product_category_name
+                ];
+            });
+
         return response()->json([
             'data' => $products
         ]);
