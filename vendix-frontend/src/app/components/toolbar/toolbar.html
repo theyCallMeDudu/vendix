@@ -1,5 +1,9 @@
 <div class="toolbar">
-  <button matMiniFab class="add-button" title="Novo registro">
-    <mat-icon>add</mat-icon>
+  <button
+    matMiniFab
+    class="add-button"
+    [routerLink]="createRoute"
+    [title]="buttonTitle">
+    <mat-icon>{{ buttonIcon }}</mat-icon>
   </button>
 </div>
