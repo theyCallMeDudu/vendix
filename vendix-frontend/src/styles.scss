@@ -37,3 +37,13 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.toast-success {
+  background: #2e7d32;
+  color: #fff;
+}
+
+.toast-error {
+  background: #c62828;
+  color: #fff;
+}

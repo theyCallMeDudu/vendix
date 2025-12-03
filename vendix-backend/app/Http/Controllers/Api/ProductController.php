@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SaveProductRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -24,5 +26,19 @@ class ProductController extends Controller
         return response()->json([
             'data' => $products
         ]);
+    }
+
+    public function saveProduct(SaveProductRequest $request): JsonResponse
+    {
+        $product = Product::create([
+            'product_name'        => $request->product_name,
+            'unit_price'          => $request->unit_price,
+            'product_category_id' => $request->product_category_id
+        ]);
+
+        return response()->json([
+            'message' => 'Product created successfully',
+            'data' => $product
+        ], JsonResponse::HTTP_CREATED);
     }
 }

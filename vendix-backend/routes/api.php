@@ -25,4 +25,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 // depois envolver com middleware de autenticação
 Route::get('/products', [ProductController::class, 'getProducts']);
+Route::post('/products', [ProductController::class, 'saveProduct']);
 Route::get('/categories', [ProductCategoryController::class, 'getCategories']);

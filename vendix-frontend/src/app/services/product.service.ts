@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../IProduct';
-
-interface ProductsResponse {
-  data: IProduct[];
-}
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   productsURL = 'http://localhost:8000/api/products';
+
+  constructor(private http: HttpClient) {}
 
   async getAllProducts(): Promise<IProduct[]> {
     const response = await fetch(this.productsURL, {
@@ -28,15 +28,17 @@ export class ProductService {
     return json.data ?? [];
   }
 
-  // async getProductById(id: number): Promise<IProduct | undefined> {
-  //   const data = await fetch(`${this.productsURL}?id=${id}`);
-  //   const productJson = await data.json();
-  //   return productJson[0] ?? [];
-  // }
+  createProduct(payload: ProductPayload): Observable<any> {
+    return this.http.post(`${this.productsURL}`, payload);
+  }
+}
 
-  // submitProduct(nome_produto: string, preco_unitario: number) {
-  //   console.log(
-  //     `Product received:  nome: ${nome_produto}, preço: ${preco_unitario}`
-  //   );
-  // }
+interface ProductsResponse {
+  data: IProduct[];
+}
+
+export interface ProductPayload {
+  product_name: string;
+  unit_price: number;
+  product_category_id: number;
 }

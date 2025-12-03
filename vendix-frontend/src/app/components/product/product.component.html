@@ -1,36 +1,114 @@
-<h1>Produto</h1>
+<h1 class="product-title">Produto</h1>
 
-<section>
-  <form>
-    <div class="div-name">
-      <mat-form-field>
-        <mat-label>Nome <span style="color: red;">*</span></mat-label>
-        <input matInput type="text">
-      </mat-form-field>
-    </div>
-    <div class="div-category-and-price">
-      <mat-form-field>
-        <mat-label>Categoria <span style="color: red;">*</span></mat-label>
-        <mat-select>
-          <mat-option
+<div class="product-form-container">
+  <div class="product-form-card">
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <!-- Nome -->
+      <div class="form-field">
+        <label for="product_name">Nome do produto</label>
+        <input
+          id="product_name"
+          type="text"
+          autocomplete="off"
+          formControlName="product_name"
+          [class.is-invalid]="f['product_name'].invalid && (f['product_name'].touched || f['product_name'].dirty)"
+        />
+
+        <!-- Erros do Angular -->
+        <div
+          class="field-errors"
+          *ngIf="f['product_name'].errors && (f['product_name'].touched || f['product_name'].dirty)"
+        >
+          <small *ngIf="f['product_name'].errors['required']">Nome é obrigatório.</small>
+          <small *ngIf="f['product_name'].errors['maxlength']">Máximo de 255 caracteres.</small>
+        </div>
+
+        <!-- Erros vindos do Laravel -->
+        <div class="field-errors" *ngIf="serverErrors['product_name']">
+          <small *ngFor="let err of serverErrors['product_name']">{{ err }}</small>
+        </div>
+      </div>
+
+      <!-- Categoria -->
+      <div class="form-field">
+        <label for="product_category_id">Categoria</label>
+        <select
+          id="product_category_id"
+          formControlName="product_category_id"
+        >
+          <option value="">Selecione</option>
+          <option
             *ngFor="let category of productCategoriesList"
             [value]="category.product_category_id">
             {{ category.product_category_name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field floatLabel="always">
-        <mat-label>Preço unitário <span style="color: red;">*</span></mat-label>
-        <input matInput type="number" class="example-right-align" placeholder="0" />
-        <span matTextPrefix>R$&nbsp;</span>
-      </mat-form-field>
-    </div>
-    <div class="div-cancel-save-buttons">
-      <button
-        class="cancel-button"
-        [routerLink]="cancelRoute">Cancelar</button>
-      <button class="save-button">Salvar</button>
-      <button class="save-and-exit-button">Salvar e sair</button>
-    </div>
-  </form>
-</section>
+          </option>
+        </select>
+
+        <!-- Erros do Angular -->
+        <div
+          class="field-errors"
+          *ngIf="f['product_category_id'].errors && (f['product_category_id'].touched || f['product_category_id'].dirty)"
+        >
+          <small *ngIf="f['product_category_id'].errors['required']">Categoria é obrigatória.</small>
+        </div>
+
+        <!-- Erros vindos do Laravel -->
+        <div class="field-errors" *ngIf="serverErrors['product_category_id']">
+          <small *ngFor="let err of serverErrors['product_category_id']">{{ err }}</small>
+        </div>
+      </div>
+
+      <!-- Preço -->
+      <div class="form-field">
+        <label for="unit_price">Preço unitário</label>
+        <input
+          id="unit_price"
+          type="number"
+          step="1.00"
+          autocomplete="off"
+          formControlName="unit_price"
+          min="0"
+          [class.is-invalid]="f['unit_price'].invalid && (f['unit_price'].touched || f['unit_price'].dirty)"
+        />
+
+        <!-- Erros do Angular -->
+        <div
+          class="field-errors"
+          *ngIf="f['unit_price'].errors && (f['unit_price'].touched || f['unit_price'].dirty)"
+        >
+          <small *ngIf="f['unit_price'].errors['required']">Preço é obrigatório.</small>
+          <small *ngIf="f['unit_price'].errors['min']">O valor não pode ser negativo.</small>
+        </div>
+
+        <!-- Erros vindos do Laravel -->
+        <div class="field-errors" *ngIf="serverErrors['unit_price']">
+          <small *ngFor="let err of serverErrors['unit_price']">{{ err }}</small>
+        </div>
+      </div>
+
+      <!-- Erro geral -->
+      <div class="form-general-error" *ngIf="serverErrors['general']">
+        <small *ngFor="let err of serverErrors['general']">{{ err }}</small>
+      </div>
+
+      <!-- Mensagem de sucesso -->
+      <div class="form-success-message" *ngIf="successMessage">
+        <strong>{{ successMessage }}</strong>
+      </div>
+
+      <div class="div-cancel-save-buttons form-buttons">
+        <button
+          class="cancel-button"
+          [routerLink]="cancelRoute"
+        >
+          Cancelar
+        </button>
+        <button class="save-button" type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

@@ -1,61 +1,67 @@
-.listing {
-  background: var(--accent-color);
-  border-radius: 30px;
-  padding-bottom: 30px;
+.product-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 
-.listing-heading {
-  color: var(--primary-color);
-  padding: 10px 20px 0 20px;
+.product-form-card {
+  background: #fff;
+  width: 420px;
+  padding: 32px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-.listing-photo {
-  height: 250px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 30px 30px 0 0;
+.product-form-card h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
 }
 
-.listing-location {
-  padding: 10px 20px 20px 20px;
-}
-
-section.listing a {
-  padding-left: 20px;
-  text-decoration: none;
-  color: var(--primary-color);
-}
-
-section.listing a::after {
-  content: "\203A";
-  margin-left: 5px;
-}
-
-form {
+.form-field {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-}
-
-.div-name {
-  width: 45%;
-}
-
-.div-name > mat-form-field {
+  margin-bottom: 18px;
   width: 100%;
 }
 
-.div-category-and-price {
-  width: 45%;
-  display: flex;
-  justify-content: space-between;
+.form-field label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
 }
 
-.div-cancel-save-buttons {
-  margin-top: 15px;
-  width: 45%;
+.form-field input,
+.form-field select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #5f3dc4; /* roxo Vendix */
+  outline: none;
+}
+
+small {
+  color: red;
+}
+
+.form-buttons {
   display: flex;
-  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.save-button:hover {
+  background: #4b2fa0;
 }
 
 .cancel-button {
@@ -80,17 +86,6 @@ form {
   font-size: 12pt;
   background-color: #3f2e56;
   color: #FFF;
-  cursor: pointer
-}
-
-.save-and-exit-button {
-  margin-right: 15px;
-  width: 120px;
-  height: 35px;
-  padding: 4px 3px;
-  border-radius: 5px;
-  font-size: 12pt;
-  background-color: #3f2e56;
-  color: #FFF;
-  cursor: pointer
+  cursor: pointer;
+  transition: background 0.2s;
 }
