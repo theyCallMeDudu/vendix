@@ -1,22 +1,38 @@
 .logo {
   display: flex;
   justify-content: center;
+  align-items: center;
   color: #FFF;
   font-size: 18pt;
   font-weight: 700;
   border-bottom: 1px solid white;
   border-right: 1px solid white;
   height: 63px;
+  padding: 0 16px;
+  
+  // Mobile: adjust logo size
+  @media (max-width: 959px) {
+    font-size: 16pt;
+    height: 56px;
+  }
 }
 
 .menu-item {
   color: #FFF;
   display: flex;
   justify-content: center;
-  padding: 15px 0;
+  align-items: center;
+  padding: 15px 16px;
   text-decoration: none;
   font-size: 12pt;
   font-weight: 400;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  
+  // Mobile: adjust padding
+  @media (max-width: 959px) {
+    padding: 12px 16px;
+    font-size: 11pt;
+  }
 }
 
 .menu-item:hover {

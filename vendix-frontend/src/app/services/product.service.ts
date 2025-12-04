@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../IProduct';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -28,13 +28,30 @@ export class ProductService {
     return json.data ?? [];
   }
 
-  createProduct(payload: ProductPayload): Observable<any> {
-    return this.http.post(`${this.productsURL}`, payload);
+  createProduct(payload: ProductPayload): Observable<ProductResponse> {
+    return this.http.post<ProductResponse>(`${this.productsURL}`, payload);
+  }
+
+  getProductById(product_id: number): Observable<IProduct> {
+    return this.http
+      .get<{ data: IProduct }>(`${this.productsURL}/${product_id}`)
+      .pipe(
+        map(response => response.data)
+      );
+  }
+
+  updateProduct(product_id: number, payload: ProductPayload): Observable<ProductResponse> {
+    return this.http.put<ProductResponse>(`${this.productsURL}/${product_id}`, payload);
   }
 }
 
 interface ProductsResponse {
   data: IProduct[];
+}
+
+interface ProductResponse {
+  message: string;
+  data: IProduct;
 }
 
 export interface ProductPayload {

@@ -22,15 +22,15 @@ const routeConfig: Routes = [
     title: 'Novo Produto'
   },
   {
+    path: 'products/:product_id/edit',
+    component: ProductFormPage,
+    title: 'Editar Produto'
+  },
+  {
     path: 'categories',
     component: ProductCategoriesPage,
     title: 'Categorias'
-  },
-  {
-    path: 'details/:id',
-    component: Details,
-    title: 'Details'
-  },
+  }
 ];
 
 export default routeConfig;

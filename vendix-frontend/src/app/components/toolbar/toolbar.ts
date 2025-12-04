@@ -5,7 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatButtonModule, MatIconModule, RouterLink],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    RouterLink
+  ],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss',
 })

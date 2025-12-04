@@ -5,37 +5,41 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import { ProductPayload, ProductService } from '../../services/product.service';
 import { IProductCategory } from '../../IProductCategory';
 import { ProductCategoryService } from '../../services/product-category.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-product',
+  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatInputModule,
     ReactiveFormsModule,
     RouterLink
   ],
-  standalone: true,
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
 export class Product {
   @Input() cancelRoute: string = '';
+  @Input() productId?: number;
 
   product = input<IProduct>();
 
   isSubmitting:boolean = false;
+  isEditMode:boolean = false;
   serverErrors: Record<string, string[]> = {};
-  successMessage = '';
+  successMessage:string = '';
 
   productsList: IProduct[] = [];
   productCategoriesList: IProductCategory[] = [];
@@ -50,14 +54,45 @@ export class Product {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    //   .getProductById();
-
-    this.loadProductCategories();
-
     this.productForm = this.formBuilder.group({
       product_name: ['', [Validators.required, Validators.maxLength(255)]],
       unit_price: [null, [Validators.required, Validators.min(0)]],
       product_category_id: [null, [Validators.required]]
+    });
+
+    this.loadProductCategories();
+  }
+
+  ngOnInit(): void {
+    if (this.productId) {
+      this.isEditMode = true;
+      this.loadProductForEdit(this.productId);
+    }
+  }
+
+  get f() {
+    return this.productForm.controls;
+  }
+
+  loadProductForEdit(productId: number): void {
+    this.productService.getProductById(productId).subscribe({
+      next: (product) => {
+        this.productForm.patchValue({
+          product_name: product.product_name,
+          unit_price: product.unit_price,
+          product_category_id: product.product_category_id,
+        });
+      },
+      error: () => {
+        this.snackBar.open('Error while loading product for edit.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['toast-error'],
+        });
+
+        this.router.navigate([this.cancelRoute || '/products']);
+      },
     });
   }
 
@@ -71,12 +106,19 @@ export class Product {
     }
 
     this.isSubmitting = true;
-    this.productService.createProduct(this.productForm.value).subscribe({
+
+    const payload = this.productForm.value as ProductPayload;
+    const target = this.cancelRoute || '/products';
+
+    const request$ = this.isEditMode && this.productId
+      ? this.productService.updateProduct(this.productId, payload)
+      : this.productService.createProduct(payload);
+
+    request$.subscribe({
       next: (response) => {
         this.isSubmitting = false;
 
         // usa a rota de cancelamento como "voltar pra listagem"
-        const target = this.cancelRoute || '/products';
         this.router.navigate([target], {
           state: {
             toast: {
@@ -111,9 +153,7 @@ export class Product {
     });
   }
 
-  get f() {
-    return this.productForm.controls;
-  }
+
 
   async loadProductCategories() {
     try {

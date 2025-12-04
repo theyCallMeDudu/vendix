@@ -41,4 +41,25 @@ class ProductController extends Controller
             'data' => $product
         ], JsonResponse::HTTP_CREATED);
     }
+
+    public function getProduct(Product $product): JsonResponse
+    {
+        return response()->json([
+            'data' => $product,
+        ]);
+    }
+
+    public function updateProduct(SaveProductRequest $request, Product $product): JsonResponse
+    {
+        $product->update([
+            'product_name'        => $request->product_name,
+            'unit_price'          => $request->unit_price,
+            'product_category_id' => $request->product_category_id
+        ]);
+
+        return response()->json([
+            'message' => 'Product updated successfully',
+            'data'    => $product->fresh()
+        ], JsonResponse::HTTP_CREATED);
+    }
 }

@@ -2,10 +2,18 @@ import { Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { IProduct } from '../../IProduct';
 import { ProductService } from '../../services/product.service';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-products-list',
-  imports: [MatTableModule],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    RouterLink
+  ],
   templateUrl: './products-list.html',
   styleUrl: './products-list.scss',
 })

@@ -6,9 +6,19 @@
   width: 240px;
   background-color: #3f2e56;
   border-radius: 0%;
+  
+  // Mobile: overlay mode
+  @media (max-width: 959px) {
+    width: 280px;
+  }
 }
 
 .app-content {
   padding: 16px;
   min-height: calc(100vh - 64px - 48px);
+  
+  // Mobile: adjust padding
+  @media (max-width: 959px) {
+    padding: 12px;
+  }
 }
