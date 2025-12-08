@@ -24,6 +24,13 @@
         title="Editar Produto">
         <mat-icon>edit</mat-icon>
       </button>
+      <button
+        matMiniFab
+        class="delete-button"
+        (click)="onDelete(element.product_id)"
+        title="Deletar Produto">
+        <mat-icon>delete</mat-icon>
+      </button>
     </td>
   </ng-container>
 

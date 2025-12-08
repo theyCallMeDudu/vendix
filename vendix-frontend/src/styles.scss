@@ -39,7 +39,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .toast-success {
-  background: #2e7d32;
+  background: #2e7d32 !important;
   color: #fff;
 }
 
@@ -49,6 +49,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .edit-button {
+  background-color: #3f2e56 !important;
+  color: #FFF !important;
+  cursor: pointer !important;
+  margin-right: 10px;
+}
+
+.delete-button {
   background-color: #3f2e56 !important;
   color: #FFF !important;
   cursor: pointer !important;

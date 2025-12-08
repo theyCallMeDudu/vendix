@@ -29,3 +29,4 @@ Route::post('/products', [ProductController::class, 'saveProduct']);
 Route::get('/products/{product}', [ProductController::class, 'getProduct']);
 Route::put('products/{product}', [ProductController::class, 'updateProduct']);
 Route::get('/categories', [ProductCategoryController::class, 'getCategories']);
+Route::delete('/products/{product}', [ProductController::class, 'destroy']);

@@ -43,6 +43,10 @@ export class ProductService {
   updateProduct(product_id: number, payload: ProductPayload): Observable<ProductResponse> {
     return this.http.put<ProductResponse>(`${this.productsURL}/${product_id}`, payload);
   }
+
+  deleteProduct(product_id: number): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${this.productsURL}/${product_id}`);
+  }
 }
 
 interface ProductsResponse {
@@ -58,4 +62,8 @@ export interface ProductPayload {
   product_name: string;
   unit_price: number;
   product_category_id: number;
+}
+
+export interface DeleteResponse {
+  message: string;
 }

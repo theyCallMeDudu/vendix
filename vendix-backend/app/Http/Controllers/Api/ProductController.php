@@ -62,4 +62,13 @@ class ProductController extends Controller
             'data'    => $product->fresh()
         ], JsonResponse::HTTP_CREATED);
     }
+
+    public function destroy(Product $product): JsonResponse
+    {
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted successfully',
+        ]);
+    }
 }
