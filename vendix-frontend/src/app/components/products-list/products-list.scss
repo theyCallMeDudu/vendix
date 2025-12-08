@@ -1,0 +1,24 @@
+// Desktop: Show buttons, hide menu
+.action-buttons-desktop {
+  display: flex;
+  gap: 8px;
+}
+
+.action-menu-mobile {
+  display: none;
+}
+
+// Mobile: Hide buttons, show menu
+@media (max-width: 959px) {
+  .action-buttons-desktop {
+    display: none;
+  }
+
+  .action-menu-mobile {
+    display: block;
+  }
+
+  .menu-trigger-button {
+    color: #3f2e56;
+  }
+}

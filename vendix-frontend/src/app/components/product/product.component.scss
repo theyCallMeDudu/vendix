@@ -59,33 +59,3 @@ small {
   gap: 12px;
   margin-top: 20px;
 }
-
-.save-button:hover {
-  background: #4b2fa0;
-}
-
-.cancel-button {
-  margin-right: 15px;
-  width: 90px;
-  height: 35px;
-  padding: 4px 3px;
-  border-radius: 5px;
-  font-size: 12pt;
-  border: none;
-  background-color: #9b9b9b;
-  color: #FFF;
-  cursor: pointer;
-}
-
-.save-button {
-  margin-right: 15px;
-  width: 90px;
-  height: 35px;
-  padding: 4px 3px;
-  border-radius: 5px;
-  font-size: 12pt;
-  background-color: #3f2e56;
-  color: #FFF;
-  cursor: pointer;
-  transition: background 0.2s;
-}
