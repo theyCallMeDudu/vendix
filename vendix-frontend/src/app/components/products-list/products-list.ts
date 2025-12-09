@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { IProduct } from '../../IProduct';
 import { ProductService } from '../../services/product.service';
@@ -23,7 +23,9 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './products-list.html',
   styleUrl: './products-list.scss',
 })
-export class ProductsList implements OnInit, OnDestroy {
+export class ProductsList implements OnInit, OnChanges, OnDestroy {
+  @Input() searchTerm: string = '';
+
   displayedColumns: string[] = ['product_name', 'product_category', 'unit_price', 'actions'];
   productsList: IProduct[] = [];
   filteredProductList: IProduct[] = [];
@@ -49,21 +51,49 @@ export class ProductsList implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   async loadProducts() {
     try {
       const products = await this.productService.getAllProducts();
 
       this.productsList = products;
-      this.filteredProductList = products;
+      this.applyFilter();
     } catch (error) {
       console.error('Erro ao carregar produtos: ', error);
     }
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchTerm']) {
+      this.applyFilter();
+    }
+  }
+
+  applyFilter(): void {
+    const term = this.searchTerm?.toLowerCase().trim();
+
+    if (!term) {
+      this.filteredProductList = this.productsList;
+      return;
+    }
+
+    this.filteredProductList = this.productsList.filter(p => {
+      const name = p.product_name?.toLowerCase() ?? '';
+      const category = (p as any).product_category_name?.toLowerCase() ?? '';
+      const unitPrice = String(p.unit_price ?? '').toLowerCase();
+
+      return (
+        name.includes(term) ||
+        category.includes(term) ||
+        unitPrice.includes(term)
+      );
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
 
   onDelete(product_id: number): void {
     const confirmed = confirm('Are you sure you want to delete this record?');

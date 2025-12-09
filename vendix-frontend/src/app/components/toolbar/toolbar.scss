@@ -1,6 +1,54 @@
 .toolbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.toolbar-left {
+  flex: 1;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: white;
+  width: 50%;
+  position: relative;
+}
+
+.search-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color: #666;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  height: 20px;
+}
+
+.clear-button {
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  mat-icon {
+    font-size: 20px;
+    color: #888;
+
+    &:hover {
+      color: #555;
+    }
+  }
 }
 
 .add-button {

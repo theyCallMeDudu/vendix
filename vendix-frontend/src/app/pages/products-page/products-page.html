@@ -1,2 +1,10 @@
-<app-toolbar createRoute="/products/new" buttonTitle="Novo produto"></app-toolbar>
-<app-products-list></app-products-list>
+<app-toolbar
+  createRoute="/products/new"
+  buttonTitle="Novo produto"
+  [enableSearch]="true"
+  searchPlaceholder="Buscar produtos"
+  (searchChange)="onSearchChange($event)">
+</app-toolbar>
+<app-products-list
+  [searchTerm]="searchTerm">
+</app-products-list>

@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="productsList" class="mat-elevation-z8">
+<table mat-table [dataSource]="filteredProductList" class="mat-elevation-z8">
   <ng-container matColumnDef="product_name">
     <th mat-header-cell *matHeaderCellDef> Produto </th>
     <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>

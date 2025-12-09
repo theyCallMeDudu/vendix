@@ -1,9 +1,35 @@
 <div class="toolbar">
-  <button
-    matMiniFab
-    class="add-button"
-    [routerLink]="createRoute"
-    [title]="buttonTitle">
-    <mat-icon>{{ buttonIcon }}</mat-icon>
-  </button>
+
+  <!-- Campo de busca custom -->
+  <div class="toolbar-left" *ngIf="enableSearch">
+    <div class="search-wrapper">
+      <mat-icon class="search-icon">search</mat-icon>
+
+      <input
+        class="search-input"
+        type="text"
+        [placeholder]="searchPlaceholder"
+        [value]="searchTerm"
+        (input)="onSearchInput($event.target.value)"
+      />
+
+      <button
+        *ngIf="searchTerm"
+        class="clear-button"
+        (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="toolbar-right">
+    <button
+      matMiniFab
+      class="add-button"
+      [routerLink]="createRoute"
+      [title]="buttonTitle">
+      <mat-icon>{{ buttonIcon }}</mat-icon>
+    </button>
+  </div>
+
 </div>

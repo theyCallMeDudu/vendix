@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
   styleUrl: './products-page.scss',
 })
 export class ProductsPage {
+  searchTerm: string = '';
+
   constructor(
     private snackBar: MatSnackBar,
     private router: Router
@@ -36,5 +38,9 @@ export class ProductsPage {
             : ['toast-error']
       });
     }
+  }
+
+  onSearchChange(term: string): void {
+    this.searchTerm = term;
   }
 }
