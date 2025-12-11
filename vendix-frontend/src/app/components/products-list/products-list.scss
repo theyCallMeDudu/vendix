@@ -1,3 +1,38 @@
+.products-list-container {
+  width: 100%;
+}
+
+// Loading state
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  min-height: 200px;
+
+  ::ng-deep mat-spinner {
+    circle {
+      stroke: #3f2e56;
+    }
+  }
+}
+
+// No data message
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  min-height: 200px;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 16px;
+}
+
 // Desktop: Show buttons, hide menu
 .action-buttons-desktop {
   display: flex;

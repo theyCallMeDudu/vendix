@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../IProduct';
 import { map, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { PaginatedResponse } from '../common/interfaces/pagination.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,20 @@ export class ProductService {
     console.log(json);
 
     return json.data ?? [];
+  }
+
+  /**
+   * Get products with pagination
+   * @param page - Page number (1-based)
+   * @param perPage - Items per page
+   * @returns Observable with paginated response
+   */
+  getProductsPaginated(page: number = 1, perPage: number = 15): Observable<PaginatedResponse<IProduct>> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString());
+
+    return this.http.get<PaginatedResponse<IProduct>>(this.productsURL, { params });
   }
 
   createProduct(payload: ProductPayload): Observable<ProductResponse> {

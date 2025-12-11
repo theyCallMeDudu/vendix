@@ -1,0 +1,16 @@
+<div class="pagination-container" *ngIf="totalItems > 0 || loading">
+  <div class="pagination-info">
+    <span class="display-text">{{ displayText }}</span>
+  </div>
+  <mat-paginator
+    [length]="totalItems"
+    [pageIndex]="paginatorPageIndex"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [showFirstLastButtons]="true"
+    [disabled]="loading"
+    (page)="onPageChange($event)"
+    [hidePageSize]="!showPageSizeOptions">
+  </mat-paginator>
+</div>
+

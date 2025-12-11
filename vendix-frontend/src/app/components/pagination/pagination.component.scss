@@ -1,0 +1,39 @@
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  width: 100%;
+
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .display-text {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  mat-paginator {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+// Responsive design
+@media (max-width: 600px) {
+  .pagination-container {
+    .pagination-info {
+      .display-text {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
